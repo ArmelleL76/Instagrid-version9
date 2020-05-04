@@ -60,17 +60,49 @@
 		D500F18A245F9E2800873ED8 /* Instagrid-version9 */ = {
 			isa = PBXGroup;
 			children = (
+				D5E4118D246079EB008331F9 /* Supporting Files */,
+				D5E4118C246079DE008331F9 /* Controller */,
+				D5E4118B246079D2008331F9 /* Model */,
+				D5E4118A246079B8008331F9 /* View */,
+			);
+			path = "Instagrid-version9";
+			sourceTree = "<group>";
+		};
+		D5E4118A246079B8008331F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D500F191245F9E2800873ED8 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D5E4118B246079D2008331F9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D5E4118C246079DE008331F9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D500F18F245F9E2800873ED8 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D5E4118D246079EB008331F9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				D500F18B245F9E2800873ED8 /* AppDelegate.swift */,
 				D500F18D245F9E2800873ED8 /* SceneDelegate.swift */,
-				D500F18F245F9E2800873ED8 /* ViewController.swift */,
-				D500F191245F9E2800873ED8 /* Main.storyboard */,
 				D500F194245F9E2800873ED8 /* Assets.xcassets */,
 				D500F196245F9E2800873ED8 /* LaunchScreen.storyboard */,
 				D5E41187246078B1008331F9 /* Delm-Medium.otf */,
 				D5E41186246078B1008331F9 /* ThirstySoftRegular.otf */,
 				D500F199245F9E2800873ED8 /* Info.plist */,
 			);
-			path = "Instagrid-version9";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
