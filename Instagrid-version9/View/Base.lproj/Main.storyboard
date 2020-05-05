@@ -161,9 +161,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.71769154069999996" green="0.84272629020000001" blue="0.89316302540000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="NH3-2a-s5R" firstAttribute="leading" secondItem="4oN-p8-N4c" secondAttribute="leading" id="0rV-c7-tPr"/>
                                     <constraint firstItem="EyG-Zt-Uvx" firstAttribute="top" secondItem="4oN-p8-N4c" secondAttribute="top" constant="20" id="2Xg-zk-LBJ"/>
                                     <constraint firstItem="cOc-UD-AXC" firstAttribute="centerX" secondItem="4oN-p8-N4c" secondAttribute="centerX" id="7po-J5-7nn"/>
                                     <constraint firstItem="NH3-2a-s5R" firstAttribute="leading" secondItem="4oN-p8-N4c" secondAttribute="leading" constant="20" id="8dx-WV-g4H"/>
+                                    <constraint firstItem="NH3-2a-s5R" firstAttribute="top" secondItem="4oN-p8-N4c" secondAttribute="top" constant="20" id="Gd0-9d-nSV"/>
+                                    <constraint firstAttribute="bottom" secondItem="NH3-2a-s5R" secondAttribute="bottom" constant="20" id="Imf-7L-ZEz"/>
                                     <constraint firstItem="EyG-Zt-Uvx" firstAttribute="top" secondItem="cOc-UD-AXC" secondAttribute="bottom" constant="10" id="Mrx-hQ-R0n"/>
                                     <constraint firstItem="cOc-UD-AXC" firstAttribute="width" secondItem="4oN-p8-N4c" secondAttribute="width" multiplier="0.8" id="NnZ-Yv-ux1"/>
                                     <constraint firstItem="NH3-2a-s5R" firstAttribute="top" secondItem="4oN-p8-N4c" secondAttribute="top" id="Ok0-VD-vqu"/>
@@ -174,6 +177,7 @@
                                     <constraint firstItem="NH3-2a-s5R" firstAttribute="leading" secondItem="4oN-p8-N4c" secondAttribute="leading" id="WJ6-6M-gft"/>
                                     <constraint firstItem="EyG-Zt-Uvx" firstAttribute="leading" secondItem="cOc-UD-AXC" secondAttribute="trailing" constant="10" id="bbE-0w-ydM"/>
                                     <constraint firstItem="cOc-UD-AXC" firstAttribute="height" secondItem="4oN-p8-N4c" secondAttribute="height" multiplier="0.9" id="daP-vt-e0b"/>
+                                    <constraint firstItem="cOc-UD-AXC" firstAttribute="leading" secondItem="NH3-2a-s5R" secondAttribute="trailing" constant="10" id="gDT-jj-d2z"/>
                                     <constraint firstItem="cOc-UD-AXC" firstAttribute="centerY" secondItem="4oN-p8-N4c" secondAttribute="centerY" id="jyZ-tl-qGw"/>
                                     <constraint firstAttribute="trailing" secondItem="EyG-Zt-Uvx" secondAttribute="trailing" id="ppt-HH-cc0"/>
                                     <constraint firstItem="EyG-Zt-Uvx" firstAttribute="leading" secondItem="4oN-p8-N4c" secondAttribute="leading" constant="20" id="qkU-bf-kys"/>
@@ -184,7 +188,10 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="0rV-c7-tPr"/>
                                         <exclude reference="8dx-WV-g4H"/>
+                                        <exclude reference="Gd0-9d-nSV"/>
+                                        <exclude reference="Imf-7L-ZEz"/>
                                         <exclude reference="Ok0-VD-vqu"/>
                                         <exclude reference="Qbg-To-5fE"/>
                                         <exclude reference="SeW-ET-XM6"/>
@@ -193,6 +200,7 @@
                                         <exclude reference="NnZ-Yv-ux1"/>
                                         <exclude reference="QUJ-8i-1jg"/>
                                         <exclude reference="daP-vt-e0b"/>
+                                        <exclude reference="gDT-jj-d2z"/>
                                         <exclude reference="qxp-2Y-Una"/>
                                         <exclude reference="2Xg-zk-LBJ"/>
                                         <exclude reference="Mrx-hQ-R0n"/>
@@ -206,7 +214,11 @@
                                 </variation>
                                 <variation key="heightClass=compact">
                                     <mask key="constraints">
+                                        <include reference="0rV-c7-tPr"/>
+                                        <include reference="Gd0-9d-nSV"/>
+                                        <include reference="Imf-7L-ZEz"/>
                                         <include reference="daP-vt-e0b"/>
+                                        <include reference="gDT-jj-d2z"/>
                                         <include reference="2Xg-zk-LBJ"/>
                                         <include reference="bbE-0w-ydM"/>
                                         <include reference="ppt-HH-cc0"/>
@@ -215,10 +227,10 @@
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="8dx-WV-g4H"/>
-                                        <include reference="Ok0-VD-vqu"/>
-                                        <include reference="wUV-UL-Apl"/>
-                                        <include reference="qxp-2Y-Una"/>
+                                        <exclude reference="8dx-WV-g4H"/>
+                                        <exclude reference="Ok0-VD-vqu"/>
+                                        <exclude reference="wUV-UL-Apl"/>
+                                        <exclude reference="qxp-2Y-Una"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=regular">
@@ -231,7 +243,11 @@
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
+                                        <include reference="8dx-WV-g4H"/>
+                                        <include reference="Ok0-VD-vqu"/>
+                                        <include reference="wUV-UL-Apl"/>
                                         <include reference="NnZ-Yv-ux1"/>
+                                        <include reference="qxp-2Y-Una"/>
                                         <include reference="Mrx-hQ-R0n"/>
                                         <include reference="TvB-aO-706"/>
                                         <include reference="qkU-bf-kys"/>
@@ -255,7 +271,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="597.10144927536237" y="-886.95652173913049"/>
+            <point key="canvasLocation" x="795.42253521126759" y="-1068.75"/>
         </scene>
     </scenes>
     <resources>
