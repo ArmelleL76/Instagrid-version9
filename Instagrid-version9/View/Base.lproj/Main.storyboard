@@ -334,6 +334,7 @@
                     <connections>
                         <outlet property="TopRightGridButton" destination="WpI-1z-dcI" id="Oi8-a9-0lA"/>
                         <outlet property="bottomLeftGridButton" destination="Bde-k2-4hP" id="WCo-LD-phO"/>
+                        <outlet property="bottomRectangleGridButton" destination="bo1-4t-jTO" id="XpN-xU-7tZ"/>
                         <outlet property="bottomRightGridButton" destination="bo1-4t-jTO" id="3io-wX-HPR"/>
                         <outlet property="layoutOneButton" destination="wlU-zU-Ebt" id="g31-cc-oOP"/>
                         <outlet property="layoutThreeButton" destination="m5r-fL-K7d" id="2nG-56-K3l"/>
@@ -341,6 +342,7 @@
                         <outlet property="swipeToShareButton" destination="mrC-73-iE3" id="da3-XN-GLh"/>
                         <outlet property="swipeToShareLabel" destination="nGi-Q7-cux" id="RE6-GL-ij3"/>
                         <outlet property="topLeftGridButton" destination="3bw-tU-nEf" id="wvW-Ww-SHs"/>
+                        <outlet property="topRectangleGridButton" destination="WpI-1z-dcI" id="3uG-nz-St3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
