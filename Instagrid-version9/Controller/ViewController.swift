@@ -27,16 +27,70 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    func changeTexLabel(){
-        if UIDeviceOrientation.portrait = true { swipeToShareLabel.text = "Swipe up to share"}
-        else if UIDeviceOrientation.landscapeLeft = true {swipeToShareLabel.text = "Swipe left to share"}
+    
+    @IBAction func selectFourSquaresLayout(_ sender: UIButton) {
+        displayFourSquaresLayout(sender: sender)
+    }
+    
+    @IBAction func selectBottomRectangleLayout(_ sender: UIButton) {
+        displayBottomRectangleLayout(sender : sender)
+    }
+    @IBAction func selectTopRectangleLayout(_ sender: UIButton) {
+        displayTopRectangleLayout(sender: sender)
+    }
+   func displayTopRectangleLayout(sender: UIButton) {
+          topLeftGridButton.isHidden = true
+          bottomLeftGridButton.isHidden = false
+          bottomRightGridButton.isHidden = false
+    layoutOneButton.isSelected = true
+   
+          sender.isSelected = true
+         
+      }
+      
+ //   @IBAction func collectPhotoInTopLeftSuare(_ sender: UIButton) {
+  //      collectPhotoFromLibrary(for: sender)
+ //   }
+  //  private func collectPhotoFromLibrary(for sender: UIButton) {
+        
+        
+  //      let imagePickerController = UIImagePickerController()
+   //     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
+  //          imagePickerController.sourceType = .photoLibrary
+   //     } else {
+   //         return
+   //     }
+        
+       
+  //  }
+    func displayBottomRectangleLayout(sender: UIButton) {
+          topLeftGridButton.isHidden = false
+          TopRightGridButton.isHidden = false
+          bottomLeftGridButton.isHidden = true
+        layoutTwoButton.isSelected = true
+          sender.isSelected = true
+         
+      }
+      
+      func displayFourSquaresLayout(sender: UIButton) {
+         topLeftGridButton.isHidden = false
+         TopRightGridButton.isHidden = false
+        bottomLeftGridButton.isHidden = false
+        bottomRightGridButton.isHidden = false
+        layoutThreeButton.isSelected = true
+          sender.isSelected = true
+          
+      }
+    func changeTextSwipeLabel(){
+        if UIDevice.current.orientation.isPortrait  { swipeToShareLabel.text = "Swipe up to share"}
+        else if UIDevice.current.orientation.isLandscape {swipeToShareLabel.text = "Swipe left to share"}
         
     }
     
-    func changeSwipeImage(){
-        if UIDeviceOrientation.portrait = true {swipeToShareButton.currentImage =  }
-        else if UIDeviceOrientation.landscapeLeft = true {swipeToShareButton.currentImage = }
-    }
+   // func changeImageSwipeButton(){
+   //     if UIDevice.current.orientation.isPortrait { swipeToShareButton.currentBackgroundImage = UIImage(named: "Arrow Up") }
+  //      else if UIDevice.current.orientation.isLandscape{ swipeToShareButton.currentBackgroundImage = UIImage(named: "Arrow Left")}
+    // }
     
-}
 
+}
