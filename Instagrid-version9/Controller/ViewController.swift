@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    
+    // MARK : Display Layout 1 , 2 or 3
     @IBAction func selectFourSquaresLayout(_ sender: UIButton) {
         displayFourSquaresLayout(sender: sender)
     }
@@ -48,21 +48,7 @@ class ViewController: UIViewController {
          
       }
       
- //   @IBAction func collectPhotoInTopLeftSuare(_ sender: UIButton) {
-  //      collectPhotoFromLibrary(for: sender)
- //   }
-  //  private func collectPhotoFromLibrary(for sender: UIButton) {
-        
-        
-  //      let imagePickerController = UIImagePickerController()
-   //     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
-  //          imagePickerController.sourceType = .photoLibrary
-   //     } else {
-   //         return
-   //     }
-        
-       
-  //  }
+
     func displayBottomRectangleLayout(sender: UIButton) {
           topLeftGridButton.isHidden = false
           TopRightGridButton.isHidden = false
@@ -81,6 +67,40 @@ class ViewController: UIViewController {
           sender.isSelected = true
           
       }
+    
+    
+    // MARK : Collect photos
+     @IBAction func collectPhotoInTopLeftSquare(_ sender: UIButton) {
+          collectPhotoFromLibrary(for: sender)
+     }
+    
+    @IBAction func collectPhotoInTopRightSquare(_ sender: UIButton) {
+         collectPhotoFromLibrary(for: sender)
+    }
+    
+    
+    @IBAction func collectPhotoInBottomLeftSquare(_ sender: UIButton) {
+        collectPhotoFromLibrary(for: sender)
+    }
+    
+    
+    @IBAction func collectPhotoInBottomRightSquare(_ sender: UIButton) {
+       collectPhotoFromLibrary(for: sender)
+    }
+    
+      private func collectPhotoFromLibrary(for sender: UIButton) {
+           
+           
+         let imagePickerController = UIImagePickerController()
+          if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
+              imagePickerController.sourceType = .photoLibrary
+          } else {
+             return
+         }
+           
+          
+   
+    
     func changeTextSwipeLabel(){
         if UIDevice.current.orientation.isPortrait  { swipeToShareLabel.text = "Swipe up to share"}
         else if UIDevice.current.orientation.isLandscape {swipeToShareLabel.text = "Swipe left to share"}
@@ -93,4 +113,5 @@ class ViewController: UIViewController {
     // }
     
 
+}
 }
