@@ -71,6 +71,7 @@
 		D5E4118A246079B8008331F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D500F196245F9E2800873ED8 /* LaunchScreen.storyboard */,
 				D500F191245F9E2800873ED8 /* Main.storyboard */,
 			);
 			path = View;
@@ -97,7 +98,6 @@
 				D500F18B245F9E2800873ED8 /* AppDelegate.swift */,
 				D500F18D245F9E2800873ED8 /* SceneDelegate.swift */,
 				D500F194245F9E2800873ED8 /* Assets.xcassets */,
-				D500F196245F9E2800873ED8 /* LaunchScreen.storyboard */,
 				D5E41187246078B1008331F9 /* Delm-Medium.otf */,
 				D5E41186246078B1008331F9 /* ThirstySoftRegular.otf */,
 				D500F199245F9E2800873ED8 /* Info.plist */,
