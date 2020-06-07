@@ -397,6 +397,7 @@
                         <outlet property="layoutOneButton" destination="wlU-zU-Ebt" id="g31-cc-oOP"/>
                         <outlet property="layoutThreeButton" destination="m5r-fL-K7d" id="2nG-56-K3l"/>
                         <outlet property="layoutTwoButton" destination="yHV-ff-e9E" id="Kic-pL-9R6"/>
+                        <outlet property="myPhotGrid" destination="cOc-UD-AXC" id="gxz-jT-6HU"/>
                         <outlet property="swipeToShareButton" destination="mrC-73-iE3" id="da3-XN-GLh"/>
                         <outlet property="swipeToShareLabel" destination="nGi-Q7-cux" id="RE6-GL-ij3"/>
                         <outlet property="topLeftGridButton" destination="3bw-tU-nEf" id="wvW-Ww-SHs"/>

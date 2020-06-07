@@ -11,6 +11,8 @@ import UIKit
 
 class ViewController: UIViewController {
     var tapButton = UIButton()
+    
+    @IBOutlet weak var myPhotGrid: UIView!
     @IBOutlet weak var swipeToShareLabel: UILabel!
     @IBOutlet weak var swipeToShareButton: UIButton!
     @IBOutlet weak var layoutOneButton: UIButton!
@@ -27,13 +29,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture: UIGestureRecognizer)))
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
         swipeUp.direction = .up
         self.view.addGestureRecognizer(swipeUp)
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture: UIGestureRecognizer)))
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
                swipeLeft.direction = .left
                self.view.addGestureRecognizer(swipeLeft)
-        
+        self.myPhotGrid.createImage()
         
     }
     
@@ -145,9 +147,9 @@ class ViewController: UIViewController {
             print("Portrait")
         }
     }
-}
 
-func respondToSwipeGesture(gesture: UIGestureRecognizer){
+
+@objc func respondToSwipeGesture(gesture: UIGestureRecognizer){
     if let swipeGesture = gesture as? UISwipeGestureRecognizer{
         switch swipeGesture.direction{
         case .up :
@@ -159,7 +161,7 @@ func respondToSwipeGesture(gesture: UIGestureRecognizer){
         }
     }
 }
-
+}
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
    
    //MARK: UIImagePickerControllerDelegate
@@ -174,4 +176,16 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
        tapButton.setImage(selectedImage, for: .normal)
        dismiss(animated: true, completion: nil)
    }
+}
+extension UIView{
+    func createImage() -> UIImage{
+        let rect : CGRect = self.accessibilityFrame
+        UIGraphicsBeginImageContext(rect.size)
+        let context : CGContext = UIGraphicsGetCurrentContext()!
+        self.layer.render(in : context)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
+        
+    }
 }
