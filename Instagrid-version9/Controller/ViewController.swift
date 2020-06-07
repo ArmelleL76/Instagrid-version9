@@ -27,6 +27,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture: UIGestureRecognizer)))
+        swipeUp.direction = .up
+        self.view.addGestureRecognizer(swipeUp)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture: UIGestureRecognizer)))
+               swipeLeft.direction = .left
+               self.view.addGestureRecognizer(swipeLeft)
+        
+        
     }
     
     // MARK : Display Layout 1 , 2 or 3
@@ -139,6 +147,18 @@ class ViewController: UIViewController {
     }
 }
 
+func respondToSwipeGesture(gesture: UIGestureRecognizer){
+    if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+        switch swipeGesture.direction{
+        case .up :
+            print("swipe up")
+        case .left :
+            print("swipe left")
+        default : break
+            
+        }
+    }
+}
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
    
