@@ -32,7 +32,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4oN-p8-N4c">
                                 <rect key="frame" x="44" y="45" width="808" height="348"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOc-UD-AXC">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOc-UD-AXC" userLabel="My PhotoGrid">
                                         <rect key="frame" x="247.33333333333334" y="17.333333333333343" width="313.33333333333326" height="313.33333333333326"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9wD-PZ-Ywd">
@@ -92,6 +92,7 @@
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.050470620389999998" green="0.40379205350000003" blue="0.61155217890000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="9wD-PZ-Ywd" secondAttribute="trailing" constant="20" id="AOk-Qd-SEb"/>
                                             <constraint firstAttribute="bottom" secondItem="9wD-PZ-Ywd" secondAttribute="bottom" constant="20" id="MQ2-6u-Yjk"/>
@@ -99,6 +100,9 @@
                                             <constraint firstItem="9wD-PZ-Ywd" firstAttribute="leading" secondItem="cOc-UD-AXC" secondAttribute="leading" constant="20" id="o2d-oo-TOj"/>
                                             <constraint firstAttribute="width" secondItem="cOc-UD-AXC" secondAttribute="height" multiplier="1:1" id="tdP-Jz-VE0"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="lTT-uX-5Wk" appends="YES" id="Wte-XF-iSl"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NH3-2a-s5R">
                                         <rect key="frame" x="0.0" y="10" width="237.33333333333334" height="328"/>
@@ -397,7 +401,7 @@
                         <outlet property="layoutOneButton" destination="wlU-zU-Ebt" id="g31-cc-oOP"/>
                         <outlet property="layoutThreeButton" destination="m5r-fL-K7d" id="2nG-56-K3l"/>
                         <outlet property="layoutTwoButton" destination="yHV-ff-e9E" id="Kic-pL-9R6"/>
-                        <outlet property="myPhotGrid" destination="cOc-UD-AXC" id="gxz-jT-6HU"/>
+                        <outlet property="myPhotoGrid" destination="cOc-UD-AXC" id="2ZI-wA-gFn"/>
                         <outlet property="swipeToShareButton" destination="mrC-73-iE3" id="da3-XN-GLh"/>
                         <outlet property="swipeToShareLabel" destination="nGi-Q7-cux" id="RE6-GL-ij3"/>
                         <outlet property="topLeftGridButton" destination="3bw-tU-nEf" id="wvW-Ww-SHs"/>
@@ -405,6 +409,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="lTT-uX-5Wk">
+                    <connections>
+                        <action selector="swipeMyPhotoGrid:" destination="BYZ-38-t0r" id="kBX-IB-LKF"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3117" y="-1078"/>
         </scene>

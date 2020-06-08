@@ -12,7 +12,8 @@ import UIKit
 class ViewController: UIViewController {
     var tapButton = UIButton()
     
-    @IBOutlet weak var myPhotGrid: UIView!
+    @IBOutlet weak var myPhotoGrid: UIView!
+    
     @IBOutlet weak var swipeToShareLabel: UILabel!
     @IBOutlet weak var swipeToShareButton: UIButton!
     @IBOutlet weak var layoutOneButton: UIButton!
@@ -29,14 +30,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
         swipeUp.direction = .up
         self.view.addGestureRecognizer(swipeUp)
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
-               swipeLeft.direction = .left
-               self.view.addGestureRecognizer(swipeLeft)
-        self.myPhotGrid.createImage()
         
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        
+       
+       
     }
     
     // MARK : Display Layout 1 , 2 or 3
@@ -59,7 +64,7 @@ class ViewController: UIViewController {
         layoutOneButton.isSelected = true
         
         sender.isSelected = true
-       layoutTwoButton.isSelected = false
+        layoutTwoButton.isSelected = false
         layoutThreeButton.isSelected = false
     }
     
@@ -130,13 +135,15 @@ class ViewController: UIViewController {
     func changeImageSwipeButton() {
         if UIDevice.current.orientation.isPortrait { swipeToShareButton.setBackgroundImage(UIImage(named: "Arrow Up"), for: UIControl.State.normal)  }
         else if UIDevice.current.orientation.isLandscape{ swipeToShareButton.setBackgroundImage(UIImage(named: "Arrow Left"), for: UIControl.State.normal)}
-   }
-  
-
-    deinit {
-       NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
-
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    
+    
     @objc func rotated() {
         changeImageSwipeButton()
         changeTextSwipeLabel()
@@ -147,39 +154,34 @@ class ViewController: UIViewController {
             print("Portrait")
         }
     }
-
-
-@objc func respondToSwipeGesture(gesture: UIGestureRecognizer){
-    if let swipeGesture = gesture as? UISwipeGestureRecognizer{
-        switch swipeGesture.direction{
-        case .up :
-            print("swipe up")
-        case .left :
-            print("swipe left")
-        default : break
-            
+    
+    
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer){
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+            if swipeGesture.direction == .up && UIDevice.current.orientation.isPortrait == true { print("swipe up")} else if swipeGesture.direction == .left && UIDevice.current.orientation.isLandscape == true {print("swipe left")}
+            else { print("swipe error")}
         }
     }
 }
-}
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-   
-   //MARK: UIImagePickerControllerDelegate
-   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-       dismiss(animated: true, completion: nil)
-   }
-   
-   internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-       guard let selectedImage = info[.originalImage] as? UIImage else {
-           fatalError("expected a library of images, but was provided the following: \(info)")
-       }
-       tapButton.setImage(selectedImage, for: .normal)
-       dismiss(animated: true, completion: nil)
-   }
+    
+    //MARK: UIImagePickerControllerDelegate
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            fatalError("expected a library of images, but was provided the following: \(info)")
+        }
+        tapButton.setImage(selectedImage, for: .normal)
+        dismiss(animated: true, completion: nil)
+    }
 }
 extension UIView{
     func createImage() -> UIImage{
-        let rect : CGRect = self.accessibilityFrame
+        let rect : CGRect = self.frame
         UIGraphicsBeginImageContext(rect.size)
         let context : CGContext = UIGraphicsGetCurrentContext()!
         self.layer.render(in : context)
