@@ -33,12 +33,12 @@ class ViewController: UIViewController {
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
         swipeUp.direction = .up
-        self.view.addGestureRecognizer(swipeUp)
+        myPhotoGrid.addGestureRecognizer(swipeUp)
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
         swipeLeft.direction = .left
-        self.view.addGestureRecognizer(swipeLeft)
-        
+        myPhotoGrid.addGestureRecognizer(swipeLeft)
+         
         
        
        
@@ -158,11 +158,45 @@ class ViewController: UIViewController {
     
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer){
+        
         if let swipeGesture = gesture as? UISwipeGestureRecognizer{
-            if swipeGesture.direction == .up && UIDevice.current.orientation.isPortrait == true { print("swipe up")} else if swipeGesture.direction == .left && UIDevice.current.orientation.isLandscape == true {print("swipe left")}
+            if swipeGesture.direction == .up && UIDevice.current.orientation.isPortrait == true { print("swipe up")
+                translateUp(.out)
+                shareMyPhotos(with : UIView.createImage(), deviceOrientation : "portrait")
+            }
+            else if swipeGesture.direction == .left && UIDevice.current.orientation.isLandscape == true {print("swipe left")
+                translateLeft(.out)
+                shareMyPhotos(with : UIView.createImage(), deviceOrientation : "landscape")
+            }
             else { print("swipe error")}
+           
         }
     }
+
+
+    func translateUp(_movement: ViewDirection){
+        switch movement{
+        case .out : UIView.animate(withDuration : 0.5){
+            self.myPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+            }
+        case .backIn :
+            UIView.animate(withDuration: 0.5){self.myPhotoGrid.transform = .identity}
+        }
+}
+
+func translateLeft(_movement: ViewDirection){
+    switch movement{
+    case .out : UIView.animate(withDuration : 0.5){
+        self.myPhotoGrid.transform = CGAffineTransform(translationX: -self.view.frame.height, y:0)
+        }
+    case .backIn :
+        UIView.animate(withDuration: 0.5){self.myPhotoGrid.transform = .identity}
+}
+    
+    func shareMyPhotos(){
+        
+    }
+}
 }
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
