@@ -28,20 +28,22 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(sender:)))
         swipeUp.direction = .up
         myPhotoGrid.addGestureRecognizer(swipeUp)
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(sender:)))
         swipeLeft.direction = .left
-        myPhotoGrid.addGestureRecognizer(swipeLeft)
-         
         
-       
-       
+        myPhotoGrid.addGestureRecognizer(swipeLeft)
+      // Initialisation du swipe
+        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+        
+        
+        
     }
     
     // MARK : Display Layout 1 , 2 or 3
@@ -157,46 +159,52 @@ class ViewController: UIViewController {
     
     
     
-    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer){
+    @objc func respondToSwipeGesture(sender: UISwipeGestureRecognizer){
         
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
-            if swipeGesture.direction == .up && UIDevice.current.orientation.isPortrait == true { print("swipe up")
-                translateUp(.out)
-                shareMyPhotos(with : UIView.createImage(), deviceOrientation : "portrait")
-            }
-            else if swipeGesture.direction == .left && UIDevice.current.orientation.isLandscape == true {print("swipe left")
-                translateLeft(.out)
-                shareMyPhotos(with : UIView.createImage(), deviceOrientation : "landscape")
-            }
-            else { print("swipe error")}
+        let swipeGesture = UISwipeGestureRecognizer()
+        if swipeGesture.direction == .up && UIDevice.current.orientation.isPortrait == true { print("swipe up")
            
+            translateUp(gesture : sender)
+            shareMyPhotos(with : myPhotoGrid.createImage(), deviceOrientation : "portrait")
         }
-    }
-
-
-    func translateUp(_movement: ViewDirection){
-        switch movement{
-        case .out : UIView.animate(withDuration : 0.5){
-            self.myPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
-            }
-        case .backIn :
-            UIView.animate(withDuration: 0.5){self.myPhotoGrid.transform = .identity}
+        else if swipeGesture.direction == .left && UIDevice.current.orientation.isLandscape == true {print("swipe left")
+          
+            translateLeft(gesture : sender)
+            shareMyPhotos(with : myPhotoGrid.createImage(), deviceOrientation : "landscape")
         }
-}
-
-func translateLeft(_movement: ViewDirection){
-    switch movement{
-    case .out : UIView.animate(withDuration : 0.5){
-        self.myPhotoGrid.transform = CGAffineTransform(translationX: -self.view.frame.height, y:0)
-        }
-    case .backIn :
-        UIView.animate(withDuration: 0.5){self.myPhotoGrid.transform = .identity}
-}
-    
-    func shareMyPhotos(){
+        else { print("swipe error")}
         
     }
-}
+    
+    
+    
+    func translateUp(gesture : UISwipeGestureRecognizer){
+        
+        let translationUp = UISwipeGestureRecognizer()
+        translationUp.direction = .up
+    }
+    
+    
+    
+    
+    func translateLeft(gesture : UISwipeGestureRecognizer){
+        let translationLeft = UISwipeGestureRecognizer()
+        translationLeft.direction = .left
+    }
+    
+    
+    //MARK: share
+    private func shareMyPhotos(with imageToShare: UIImage, deviceOrientation: String) {
+        let myImage = myPhotoGrid.createImage()
+        let activityViewController = UIActivityViewController(activityItems: [myImage], applicationActivities: nil)
+        self.present(activityViewController, animated : true, completion : nil)
+            }
+       
+            
+       
+        
+        
+    
 }
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -225,3 +233,4 @@ extension UIView{
         
     }
 }
+
