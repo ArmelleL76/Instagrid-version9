@@ -25,26 +25,31 @@ class ViewController: UIViewController {
     @IBOutlet weak var bottomRightGridButton: UIButton!
     @IBOutlet weak var bottomRectangleGridButton: UIButton!
     @IBOutlet weak var topRectangleGridButton: UIButton!
-    
+    // Create an optional UISwipeGestureRecognizer
+    private var swipeGestureRecognizer: UISwipeGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(sender:)))
-        swipeUp.direction = .up
-        myPhotoGrid.addGestureRecognizer(swipeUp)
+
+           // Initialize the swipeGestureRecognizer, and add action (a method: presentActivityController) to be trigger when swipe is used
+           swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(presentActivityController))
+           // Add a second action (a method: gridViewTranslate) to be trigger when swipe is used
+           swipeGestureRecognizer?.addTarget(self, action: #selector(gridViewTranslate))
+
+           // Unwrap optional value of swipeGestureRecognizer
+           guard let swipeGestureRecognizer = swipeGestureRecognizer else { return }
+
+           // Add the gesture to the object
+           myPhotoGrid.addGestureRecognizer(swipeGestureRecognizer)
+
+           // NotificationCenter is gonna be notified everytime the device orientation change ( UIDevice.orientationDidChangeNotification )
+           // And is gonna trigger the selected method ( handleSwipeDirection ) everytime the NotificationCenter is notified
+           NotificationCenter.default.addObserver(self, selector: #selector(handleSwipeDirection), name: UIDevice.orientationDidChangeNotification, object: nil)
+       }
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(sender:)))
-        swipeLeft.direction = .left
-        
-        myPhotoGrid.addGestureRecognizer(swipeLeft)
-      // Initialisation du swipe
-        // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         
-        
-        
-    }
+    
     
     // MARK : Display Layout 1 , 2 or 3
     @IBAction func selectFourSquaresLayout(_ sender: UIButton) {
@@ -165,12 +170,12 @@ class ViewController: UIViewController {
         if swipeGesture.direction == .up && UIDevice.current.orientation.isPortrait == true { print("swipe up")
            
             translateUp(gesture : sender)
-            shareMyPhotos(with : myPhotoGrid.createImage(), deviceOrientation : "portrait")
+            shareMyPhotos(with : myPhotoGrid.image, deviceOrientation : "portrait")
         }
         else if swipeGesture.direction == .left && UIDevice.current.orientation.isLandscape == true {print("swipe left")
           
             translateLeft(gesture : sender)
-            shareMyPhotos(with : myPhotoGrid.createImage(), deviceOrientation : "landscape")
+            shareMyPhotos(with : myPhotoGrid.image, deviceOrientation : "landscape")
         }
         else { print("swipe error")}
         
@@ -195,17 +200,60 @@ class ViewController: UIViewController {
     
     //MARK: share
     private func shareMyPhotos(with imageToShare: UIImage, deviceOrientation: String) {
-        let myImage = myPhotoGrid.createImage()
+        let myImage = myPhotoGrid.image
         let activityViewController = UIActivityViewController(activityItems: [myImage], applicationActivities: nil)
         self.present(activityViewController, animated : true, completion : nil)
             }
        
             
-       
-        
-        
+       @objc
+          func presentActivityController() {
+              // Initialize an UIActivityViewController with the item you want to share (brownView.image)
+              let activityController = UIActivityViewController(activityItems: [myPhotoGrid.image], applicationActivities: nil)
+              // Display the activityController
+              present(activityController, animated: true)
+
+              // Define code you want to execute as soon as the activityController is dismissed
+              // completionWithItemsHandler property accepts a closure with 4 parameters (That we're not gonna use here, so instead of naming them just "name" them "_")
+              activityController.completionWithItemsHandler = { _, _, _, _ in
+                  // "Animate" an UIView transformation
+                  UIView.animate(withDuration: 0.5, animations: {
+                      // Bring back the brownView to his initial coordinates
+                      self.myPhotoGrid.transform = .identity
+                  })
+              }
+
+          }
+
+        @objc
+          func gridViewTranslate() {
+              if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
+                  // "Animate" an UIView transformation
+                  UIView.animate(withDuration: 0.5, animations: {
+                      // Transform the brownView coordinates
+                      self.myPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+                  })
+              } else {
+                  UIView.animate(withDuration: 0.5, animations: {
+                      self.myPhotoGrid.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
+                  })
+              }
+          }
+     // Modify the swipeGestureRecognizer direction
+        @objc
+        func handleSwipeDirection() {
+            if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
+                swipeGestureRecognizer?.direction = .up
+            } else {
+                swipeGestureRecognizer?.direction = .left
+            }
+        }
+    }
+
+
+
     
-}
+
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: UIImagePickerControllerDelegate
@@ -221,16 +269,13 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         dismiss(animated: true, completion: nil)
     }
 }
-extension UIView{
-    func createImage() -> UIImage{
-        let rect : CGRect = self.frame
-        UIGraphicsBeginImageContext(rect.size)
-        let context : CGContext = UIGraphicsGetCurrentContext()!
-        self.layer.render(in : context)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
-        
+extension UIView {
+    /// transform an UIView to an UImage
+    var image: UIImage {
+        let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
+        let image = renderer.image { _ in
+            self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        }
+        return image
     }
 }
-
