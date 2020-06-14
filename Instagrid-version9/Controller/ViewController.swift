@@ -163,48 +163,6 @@ class ViewController: UIViewController {
     }
     
     
-    
-    @objc func respondToSwipeGesture(sender: UISwipeGestureRecognizer){
-        
-        let swipeGesture = UISwipeGestureRecognizer()
-        if swipeGesture.direction == .up && UIDevice.current.orientation.isPortrait == true { print("swipe up")
-           
-            translateUp(gesture : sender)
-            shareMyPhotos(with : myPhotoGrid.image, deviceOrientation : "portrait")
-        }
-        else if swipeGesture.direction == .left && UIDevice.current.orientation.isLandscape == true {print("swipe left")
-          
-            translateLeft(gesture : sender)
-            shareMyPhotos(with : myPhotoGrid.image, deviceOrientation : "landscape")
-        }
-        else { print("swipe error")}
-        
-    }
-    
-    
-    
-    func translateUp(gesture : UISwipeGestureRecognizer){
-        
-        let translationUp = UISwipeGestureRecognizer()
-        translationUp.direction = .up
-    }
-    
-    
-    
-    
-    func translateLeft(gesture : UISwipeGestureRecognizer){
-        let translationLeft = UISwipeGestureRecognizer()
-        translationLeft.direction = .left
-    }
-    
-    
-    //MARK: share
-    private func shareMyPhotos(with imageToShare: UIImage, deviceOrientation: String) {
-        let myImage = myPhotoGrid.image
-        let activityViewController = UIActivityViewController(activityItems: [myImage], applicationActivities: nil)
-        self.present(activityViewController, animated : true, completion : nil)
-            }
-       
             
        @objc
           func presentActivityController() {
