@@ -44,7 +44,7 @@ class ViewController: UIViewController {
 
            // NotificationCenter is gonna be notified everytime the device orientation change ( UIDevice.orientationDidChangeNotification )
            // And is gonna trigger the selected method ( handleSwipeDirection ) everytime the NotificationCenter is notified
-           NotificationCenter.default.addObserver(self, selector: #selector(handleSwipeDirection), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
        }
         
         
@@ -150,14 +150,16 @@ class ViewController: UIViewController {
     }
     
     
-    
+    // Modify the swipeGestureRecognizer direction and change imaage of swipe button ans text of swipeLabel
     @objc func rotated() {
         changeImageSwipeButton()
         changeTextSwipeLabel()
         if UIDevice.current.orientation.isLandscape {
+            swipeGestureRecognizer?.direction = .left
             print("Landscape")
             
         } else {
+            swipeGestureRecognizer?.direction = .up
             print("Portrait")
         }
     }
@@ -166,7 +168,7 @@ class ViewController: UIViewController {
             
        @objc
           func presentActivityController() {
-              // Initialize an UIActivityViewController with the item you want to share (brownView.image)
+              // Initialize an UIActivityViewController with the item you want to share (myPhotoGrid.image)
               let activityController = UIActivityViewController(activityItems: [myPhotoGrid.image], applicationActivities: nil)
               // Display the activityController
               present(activityController, animated: true)
@@ -188,7 +190,7 @@ class ViewController: UIViewController {
               if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
                   // "Animate" an UIView transformation
                   UIView.animate(withDuration: 0.5, animations: {
-                      // Transform the brownView coordinates
+                      // Transform myPhotoGrid coordinates
                       self.myPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
                   })
               } else {

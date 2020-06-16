@@ -175,8 +175,6 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="3O0-xy-c3Q"/>
-                                                <exclude reference="gT8-hL-THz"/>
                                                 <exclude reference="1qF-20-1Xq"/>
                                                 <exclude reference="4jn-Ir-JdG"/>
                                                 <exclude reference="7Ya-x0-hSx"/>
@@ -184,24 +182,26 @@
                                                 <exclude reference="FuT-t6-bKF"/>
                                                 <exclude reference="Mrz-5M-WmX"/>
                                                 <exclude reference="khY-Wd-pQp"/>
+                                                <exclude reference="3O0-xy-c3Q"/>
+                                                <exclude reference="gT8-hL-THz"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact">
                                             <mask key="constraints">
-                                                <include reference="gT8-hL-THz"/>
                                                 <include reference="1qF-20-1Xq"/>
                                                 <include reference="Mrz-5M-WmX"/>
                                                 <include reference="emg-tj-V4a"/>
                                                 <include reference="khY-Wd-pQp"/>
+                                                <include reference="gT8-hL-THz"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="3O0-xy-c3Q"/>
                                                 <include reference="4jn-Ir-JdG"/>
                                                 <include reference="7Ya-x0-hSx"/>
                                                 <include reference="C6b-kp-fe2"/>
                                                 <include reference="FuT-t6-bKF"/>
+                                                <include reference="3O0-xy-c3Q"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -233,7 +233,7 @@
                                                             <action selector="selectBottomRectangleLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X58-iU-pC1"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5r-fL-K7d">
+                                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5r-fL-K7d">
                                                         <rect key="frame" x="219.33333333333334" y="0.0" width="99.666666666666657" height="99.666666666666671"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="m5r-fL-K7d" secondAttribute="height" multiplier="1:1" id="X2l-oG-IJr"/>
