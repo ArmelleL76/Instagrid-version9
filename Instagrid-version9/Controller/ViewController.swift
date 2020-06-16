@@ -29,8 +29,8 @@ class ViewController: UIViewController {
     private var swipeGestureRecognizer: UISwipeGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+        TopRightGridButton.imageView?.contentMode = .scaleAspectFill
+        bottomRightGridButton.imageView?.contentMode = .scaleAspectFill
            // Initialize the swipeGestureRecognizer, and add action (a method: presentActivityController) to be trigger when swipe is used
            swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(presentActivityController))
            // Add a second action (a method: gridViewTranslate) to be trigger when swipe is used
