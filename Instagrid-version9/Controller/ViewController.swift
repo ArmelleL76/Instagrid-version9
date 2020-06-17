@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         // Initialize the swipeGestureRecognizer, and add action (a method: presentActivityController) to be trigger when swipe is used
        
         swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(presentActivityController))
-        // Add a second action (a method: gridViewTranslate) to be trigger when swipe is used
+        // Add a second action (a method: myPhotoGridTranslation) to be trigger when swipe is used
        
         swipeGestureRecognizer?.addTarget(self, action: #selector(myPhotoGridTranslation))
         
