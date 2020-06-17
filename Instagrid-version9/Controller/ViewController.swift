@@ -10,6 +10,8 @@ import UIKit
 
 
 class ViewController: UIViewController {
+    //  MARK : properties
+    
     var tapButton = UIButton()
     
     @IBOutlet weak var myPhotoGrid: UIView!
@@ -25,33 +27,44 @@ class ViewController: UIViewController {
     @IBOutlet weak var bottomRightGridButton: UIButton!
     @IBOutlet weak var bottomRectangleGridButton: UIButton!
     @IBOutlet weak var topRectangleGridButton: UIButton!
+   
     // Create an optional UISwipeGestureRecognizer
     private var swipeGestureRecognizer: UISwipeGestureRecognizer?
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         TopRightGridButton.imageView?.contentMode = .scaleAspectFill
         bottomRightGridButton.imageView?.contentMode = .scaleAspectFill
-           // Initialize the swipeGestureRecognizer, and add action (a method: presentActivityController) to be trigger when swipe is used
-           swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(presentActivityController))
-           // Add a second action (a method: gridViewTranslate) to be trigger when swipe is used
-           swipeGestureRecognizer?.addTarget(self, action: #selector(myPhotoGridTranslation))
-           // Unwrap optional value of swipeGestureRecognizer
-           guard let swipeGestureRecognizer = swipeGestureRecognizer else { return }
-
-           // Add the gesture to the object
-           myPhotoGrid.addGestureRecognizer(swipeGestureRecognizer)
-
-           // NotificationCenter is gonna be notified everytime the device orientation change ( UIDevice.orientationDidChangeNotification )
-           // And is gonna trigger the selected method ( handleSwipeDirection ) everytime the NotificationCenter is notified
+       
+        
+        // Initialize the swipeGestureRecognizer, and add action (a method: presentActivityController) to be trigger when swipe is used
+       
+        swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(presentActivityController))
+        // Add a second action (a method: gridViewTranslate) to be trigger when swipe is used
+       
+        swipeGestureRecognizer?.addTarget(self, action: #selector(myPhotoGridTranslation))
+        
+        // Unwrap optional value of swipeGestureRecognizer
+        guard let swipeGestureRecognizer = swipeGestureRecognizer else { return }
+        
+        // Add the gesture to the object
+       
+        myPhotoGrid.addGestureRecognizer(swipeGestureRecognizer)
+        
+        // NotificationCenter is gonna be notified everytime the device orientation change ( UIDevice.orientationDidChangeNotification )
+        // And is gonna trigger the selected method ( handleSwipeDirection ) everytime the NotificationCenter is notified
+       
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-       }
-        
-        
-        
+    }
     
     
-    // MARK : Display Layout 1 , 2 or 3
+    
+    
+    // MARK : méthods
+    
+      // MARK : Display Layout 1 , 2 or 3
     @IBAction func selectFourSquaresLayout(_ sender: UIButton) {
         displayFourSquaresLayout(sender: sender)
     }
@@ -99,7 +112,7 @@ class ViewController: UIViewController {
     }
     
     
-    // MARK : Collect photos
+      // MARK : Collect photos
     @IBAction func collectPhotoInTopLeftSquare(_ sender: UIButton) {
         collectPhotoFromLibrary(for: sender)
     }
@@ -165,54 +178,54 @@ class ViewController: UIViewController {
     }
     
     
-            
-       @objc
-          func presentActivityController() {
-              // Initialize an UIActivityViewController with the item you want to share (myPhotoGrid.image)
-              let activityController = UIActivityViewController(activityItems: [myPhotoGrid.image], applicationActivities: nil)
-              // Display the activityController
-              present(activityController, animated: true)
-
-              // Define code you want to execute as soon as the activityController is dismissed
-              // completionWithItemsHandler property accepts a closure with 4 parameters (That we're not gonna use here, so instead of naming them just "name" them "_")
-              activityController.completionWithItemsHandler = { _, _, _, _ in
-                  // "Animate" the UIView translation
-                  UIView.animate(withDuration: 0.5, animations: {
-                      // Bring back the gridView to his initial coordinates
-                      self.myPhotoGrid.transform = .identity
-                  })
-              }
-
-          }
-
-        @objc
-          func myPhotoGridTranslation() {
-              if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
-                  // "Animate" the UIView translation
-                  UIView.animate(withDuration: 0.5, animations: {
-                      // Transform myPhotoGrid coordinates
-                      self.myPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
-                  })
-              } else {
-                  UIView.animate(withDuration: 0.5, animations: {
-                      self.myPhotoGrid.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
-                  })
-              }
-          }
-     // Modify the swipeGestureRecognizer direction
-        @objc
-        func handleSwipeDirection() {
-            if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
-                swipeGestureRecognizer?.direction = .up
-            } else {
-                swipeGestureRecognizer?.direction = .left
-            }
+    
+    @objc
+    func presentActivityController() {
+        // Initialize an UIActivityViewController with the item you want to share (myPhotoGrid.image)
+        let activityController = UIActivityViewController(activityItems: [myPhotoGrid.image], applicationActivities: nil)
+        // Display the activityController
+        present(activityController, animated: true)
+        
+        // Define code you want to execute as soon as the activityController is dismissed
+        // completionWithItemsHandler property accepts a closure with 4 parameters (That we're not gonna use here, so instead of naming them just "name" them "_")
+        activityController.completionWithItemsHandler = { _, _, _, _ in
+            // "Animate" the UIView translation
+            UIView.animate(withDuration: 0.5, animations: {
+                // Bring back the gridView to his initial coordinates
+                self.myPhotoGrid.transform = .identity
+            })
+        }
+        
+    }
+    
+    @objc
+    func myPhotoGridTranslation() {
+        if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
+            // "Animate" the UIView translation
+            UIView.animate(withDuration: 0.5, animations: {
+                // Transform myPhotoGrid coordinates
+                self.myPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.myPhotoGrid.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
+            })
         }
     }
+    // Modify the swipeGestureRecognizer direction
+    @objc
+    func handleSwipeDirection() {
+        if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
+            swipeGestureRecognizer?.direction = .up
+        } else {
+            swipeGestureRecognizer?.direction = .left
+        }
+    }
+}
 
 
 
-    
+
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
