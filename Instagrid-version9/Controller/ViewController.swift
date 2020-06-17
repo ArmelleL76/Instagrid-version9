@@ -29,13 +29,13 @@ class ViewController: UIViewController {
     private var swipeGestureRecognizer: UISwipeGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         TopRightGridButton.imageView?.contentMode = .scaleAspectFill
         bottomRightGridButton.imageView?.contentMode = .scaleAspectFill
            // Initialize the swipeGestureRecognizer, and add action (a method: presentActivityController) to be trigger when swipe is used
            swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(presentActivityController))
            // Add a second action (a method: gridViewTranslate) to be trigger when swipe is used
-           swipeGestureRecognizer?.addTarget(self, action: #selector(gridViewTranslate))
-
+           swipeGestureRecognizer?.addTarget(self, action: #selector(myPhotoGridTranslation))
            // Unwrap optional value of swipeGestureRecognizer
            guard let swipeGestureRecognizer = swipeGestureRecognizer else { return }
 
@@ -176,9 +176,9 @@ class ViewController: UIViewController {
               // Define code you want to execute as soon as the activityController is dismissed
               // completionWithItemsHandler property accepts a closure with 4 parameters (That we're not gonna use here, so instead of naming them just "name" them "_")
               activityController.completionWithItemsHandler = { _, _, _, _ in
-                  // "Animate" an UIView transformation
+                  // "Animate" the UIView translation
                   UIView.animate(withDuration: 0.5, animations: {
-                      // Bring back the brownView to his initial coordinates
+                      // Bring back the gridView to his initial coordinates
                       self.myPhotoGrid.transform = .identity
                   })
               }
@@ -186,9 +186,9 @@ class ViewController: UIViewController {
           }
 
         @objc
-          func gridViewTranslate() {
+          func myPhotoGridTranslation() {
               if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
-                  // "Animate" an UIView transformation
+                  // "Animate" the UIView translation
                   UIView.animate(withDuration: 0.5, animations: {
                       // Transform myPhotoGrid coordinates
                       self.myPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
@@ -230,7 +230,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
 }
 extension UIView {
-    /// transform an UIView to an UImage
+    /// transform the gridView to an UImage
     var image: UIImage {
         let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
         let image = renderer.image { _ in
