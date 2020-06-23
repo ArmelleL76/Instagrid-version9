@@ -57,6 +57,8 @@ class ViewController: UIViewController {
         // And is gonna trigger the selected method ( handleSwipeDirection ) everytime the NotificationCenter is notified
        
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+        swipeToShareButton.imageView?.contentMode = .center
     }
     
     
@@ -200,7 +202,7 @@ class ViewController: UIViewController {
     
     @objc
     func myPhotoGridTranslation() {
-        if UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown {
+        if UIDevice.current.orientation.isPortrait {
             // "Animate" the UIView translation
             UIView.animate(withDuration: 0.5, animations: {
                 // Transform myPhotoGrid coordinates

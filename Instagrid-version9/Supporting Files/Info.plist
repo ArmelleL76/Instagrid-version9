@@ -65,5 +65,7 @@
 		<string>Delm-Medium.otf</string>
 		<string>ThirstySoftRegular.otf</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Autorisation de sauvegarder les photos</string>
 </dict>
 </plist>
