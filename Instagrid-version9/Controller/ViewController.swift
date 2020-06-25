@@ -153,7 +153,7 @@ class ViewController: UIViewController {
         
     }
     
-    /// Une super fonction
+    ///
     func changeImageSwipeButton() {
         if UIDevice.current.orientation.isPortrait { swipeToShareButton.setBackgroundImage(UIImage(named: "Arrow Up"), for: UIControl.State.normal)  }
         else if UIDevice.current.orientation.isLandscape{ swipeToShareButton.setBackgroundImage(UIImage(named: "Arrow Left"), for: UIControl.State.normal)}
