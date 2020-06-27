@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         myPhotoGrid.addGestureRecognizer(swipeGestureRecognizer)
         
         // NotificationCenter is gonna be notified everytime the device orientation change ( UIDevice.orientationDidChangeNotification )
-        // And is gonna trigger the selected method ( handleSwipeDirection ) everytime the NotificationCenter is notified
+        // And is gonna trigger the selected method ( rotated ) everytime the NotificationCenter is notified
        
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
@@ -231,7 +231,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    //MARK: UIImagePickerControllerDelegate
+    //MARK: - UIImagePickerControllerDelegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
